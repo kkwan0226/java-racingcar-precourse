@@ -51,6 +51,38 @@ public class CarList {
             car.forward();
         }
     }
+    
+    public List<Car> getLongestDistanceCarList() {
+        int longestDistance = getLongestDistance();
+
+        return extractLongestDistanceCarList(longestDistance);
+    }
+
+    private int getLongestDistance() {
+        int longestDistance = 0;
+
+        for (Car car : this.carList) {
+            longestDistance = Math.max(longestDistance, car.getPosition());
+        }
+
+        return longestDistance;
+    }
+
+    private List<Car> extractLongestDistanceCarList(int longestDistance) {
+        List<Car> carList = new ArrayList<>();
+
+        for (Car car : this.carList) {
+            if (isLongestDistanceCar(car, longestDistance)) {
+                carList.add(car);
+            }
+        }
+
+        return carList;
+    }
+
+    private boolean isLongestDistanceCar(Car car, int longestDistance) {
+        return car.getPosition() == longestDistance;
+    }
 
     public List<Car> getCarList() {
         return this.carList;
